@@ -1,9 +1,16 @@
+import {useState} from "react";
+
 import { CORE_CONCEPTS } from "./data";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/TabButton.jsx";
 
 function App() {
+  let tabContent = "Please select a tab to see the content";
+
+  function handleSelect(selectedButton) {
+    tabContent = selectedButton;
+  }
   return (
     <div>
       <Header />
@@ -24,11 +31,12 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <li><TabButton>Component</TabButton></li>
-            <li><TabButton>JSX</TabButton></li>
-            <li><TabButton>Props</TabButton></li>
-            <li><TabButton>State</TabButton></li>
+            <TabButton onSelect={() => {handleSelect('component')}}>Component</TabButton>
+            <TabButton onSelect={() => {handleSelect('jsx')}}>JSX</TabButton>
+            <TabButton onSelect={() => {handleSelect('props')}}>Props</TabButton>
+            <TabButton onSelect={() => {handleSelect('state')}}>State</TabButton>
           </menu>
+          {tabContent}
         </section>
       </main>
     </div>
